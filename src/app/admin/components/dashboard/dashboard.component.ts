@@ -1,35 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertifyOptions, AlertifyService, MessageType, Position } from '../../../services/admin/alertify.service';
+import { BaseComponent, SpinnerType } from '../../../base/base.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
-
-  constructor(private alertify : AlertifyService) { }
-
-    ngOnInit(): void {
+export class DashboardComponent extends BaseComponent implements OnInit {
+  constructor(spinner : NgxSpinnerService){
+    super(spinner);
   }
-  messageDump(){
-    this.alertify.message("selam",{
-      messageType: MessageType.Success,
-      delay:5,
-      position: Position.TopCenter
-    });
-  }
-
-  messageDismiss(){
-    this.alertify.dissmissAll();
-  }
-
-  messageDismissOther(){
-    this.alertify.message("selam",{
-      messageType: MessageType.Success,
-      delay:5,
-      position: Position.TopCenter,
-      dismissOther: true
-    });
+  ngOnInit(): void {
+    this.showSpinner(SpinnerType.BallClipRotatePulse);
   }
 }
