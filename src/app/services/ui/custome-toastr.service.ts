@@ -9,13 +9,14 @@ export class CustomeToastrService {
   constructor(private toastr: ToastrService) { }
 
   message(message: string, title: string, toastrOptions: Partial<ToastrOptions>){
-    this.toastr[toastrOptions.messageType](message,title,{ positionClass: toastrOptions.position, disableTimeOut:'extendedTimeOut', closeButton: true});
+    this.toastr[toastrOptions.messageType](message,title,{ positionClass: toastrOptions.position, disableTimeOut:'extendedTimeOut', closeButton: true, timeOut:toastrOptions.timeOut});
   }
 }
 
 export class ToastrOptions{
   messageType: ToastrMessageType = ToastrMessageType.Info;
   position: ToastrPosition = ToastrPosition.BottomLeft;
+  timeOut : number = 3000;
 }
 
 export enum ToastrMessageType{
