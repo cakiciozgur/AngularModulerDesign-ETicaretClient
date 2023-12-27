@@ -27,6 +27,8 @@ export class CreateComponent extends BaseComponent {
     this.productService.createProduct(create_product, () => {
       this.hideSpinner(SpinnerType.Timer);
       this.alertifyService.message("Ürün Başarıyla Eklendi", { messageType: MessageType.Success, position: Position.TopRight, dismissOther: true });
+    }, errorMessage => {
+      this.alertifyService.message(errorMessage, { messageType: MessageType.Error, position: Position.TopRight, dismissOther: true });
     });
   }
 
