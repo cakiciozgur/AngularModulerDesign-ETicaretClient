@@ -30,7 +30,7 @@ export class HttpClientService {
 
     let url: string = this.checkFullEndpoint(requestParameter);
 
-    url = `${url}${id ? `/${id}` : ""}`;
+    url = `${url}${id ? `/${id}` : ""}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
     return this.httpClient.get<T>(url, { headers: requestParameter.headers })
 
@@ -38,7 +38,7 @@ export class HttpClientService {
 
   post<T>(requestParameter: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
 
-    let url: string = this.checkFullEndpoint(requestParameter);
+    let url: string = `${this.checkFullEndpoint(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
     return this.httpClient.post<T>(url, body, { headers: requestParameter.headers });
 
@@ -46,13 +46,14 @@ export class HttpClientService {
 
   put<T>(requestParameter: Partial<RequestParameters>, body: Partial<T>): Observable<T> {
 
-    let url: string = this.checkFullEndpoint(requestParameter);
+    let url: string = `${this.checkFullEndpoint(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
     return this.httpClient.put<T>(url, body, { headers: requestParameter.headers });
   }
 
-  delete<T>(requestParameter: Partial<RequestParameters>, id: string) : Observable<T> {
-    let url: string = this.checkFullEndpoint(requestParameter);
+  delete<T>(requestParameter: Partial<RequestParameters>, id: string): Observable<T> {
+
+    let url: string = `${this.checkFullEndpoint(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
     url = `${url}/${id}`;
 
@@ -66,5 +67,6 @@ export class RequestParameters {
   action?: string;
   headers?: HttpHeaders;
   baseUrl?: string;
-  fullEndPoint: string;
+  fullEndPoint? : string;
+  queryString?: string;
 }

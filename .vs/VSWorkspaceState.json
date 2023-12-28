@@ -2,15 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app",
-    "\\src\\app\\admin",
-    "\\src\\app\\admin\\components",
-    "\\src\\app\\admin\\components\\product\\list",
-    "\\src\\app\\contracts",
-    "\\src\\app\\services",
-    "\\src\\app\\services\\common",
-    "\\src\\app\\services\\common\\models"
+    "\\src\\app"
   ],
-  "SelectedNode": "\\src\\app\\admin\\components\\product",
   "PreviewInSolutionExplorer": false
 }
