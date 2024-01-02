@@ -6,6 +6,7 @@ import { BaseComponent, SpinnerType } from '../../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { RequestParameters } from '../../../../services/common/http-client.service';
 
 declare var $: any;
 
@@ -47,5 +48,7 @@ export class ListComponent extends BaseComponent {
     await this.getProducts();
 
   }
+  requestParameters : RequestParameters = {
+    controller : "products"
+  }
 }
-

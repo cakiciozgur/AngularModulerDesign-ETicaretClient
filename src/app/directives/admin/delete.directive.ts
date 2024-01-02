@@ -4,6 +4,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../base/base.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent, DeleteState } from '../../dialogs/delete-dialog/delete-dialog.component';
+import { HttpClientService, RequestParameters } from '../../services/common/http-client.service';
+import { AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 declare var $:any
 @Directive({
@@ -11,7 +14,12 @@ declare var $:any
 })
 export class DeleteDirective {
 
-  constructor(private element: ElementRef, private _renderer: Renderer2, private productService: ProductService, private spinner: NgxSpinnerService, public dialog: MatDialog)
+  constructor(private element: ElementRef,
+    private _renderer: Renderer2,
+    private httpClientService: HttpClientService,
+    private spinner: NgxSpinnerService,
+    public dialog: MatDialog,
+    private alertifyService: AlertifyService)
   {
     const image = _renderer.createElement("img");
     image.setAttribute("src", "../../../../../assets/delete.png");
@@ -21,6 +29,7 @@ export class DeleteDirective {
     _renderer.appendChild(element.nativeElement, image);
   }
   @Input() id: string;
+  @Input() requestParameters: RequestParameters;
   @Output() callback: EventEmitter<any> = new EventEmitter();
 
   @HostListener("click")
@@ -28,14 +37,19 @@ export class DeleteDirective {
     this.openDialog(async () => {
       this.spinner.show(SpinnerType.Timer);
       const td: HTMLTableCellElement = this.element.nativeElement;
-      await this.productService.delete(this.id);
-      $(td.parentElement).animate({
-        opacity: 0,
-        left: "+= 50",
-        height: "toggle"
-      }, 700, () => {
-        this.callback.emit();
-      });         
+      await this.httpClientService.delete({ controller: this.requestParameters.controller }, this.id).subscribe(data => {
+        $(td.parentElement).animate({
+          opacity: 0,
+          left: "+= 50",
+          height: "toggle"
+        }, 700, () => {
+          this.callback.emit();
+          this.alertifyService.message("Ürün Silinmiştir", { dismissOther : true, messageType: MessageType.Success, position: Position.TopCenter })
+        });
+      }, (errorResponse: HttpErrorResponse) => {
+        this.spinner.hide(SpinnerType.Timer);
+        this.alertifyService.message(errorResponse.message, { dismissOther: true, messageType: MessageType.Error, position: Position.TopCenter });
+      });
     });
   }
 
