@@ -7,8 +7,9 @@ import { DeleteDialogComponent, DeleteState } from '../../dialogs/delete-dialog/
 import { HttpClientService, RequestParameters } from '../../services/common/http-client.service';
 import { AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DialogService } from '../../services/common/dialog.service';
 
-declare var $:any
+declare var $: any
 @Directive({
   selector: '[appDelete]'
 })
@@ -19,8 +20,8 @@ export class DeleteDirective {
     private httpClientService: HttpClientService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
-    private alertifyService: AlertifyService)
-  {
+    private alertifyService: AlertifyService,
+    private dialogService: DialogService) {
     const image = _renderer.createElement("img");
     image.setAttribute("src", "../../../../../assets/delete.png");
     image.setAttribute("style", "cursor:pointer;");
@@ -34,23 +35,27 @@ export class DeleteDirective {
 
   @HostListener("click")
   async onclick() {
-    this.openDialog(async () => {
-      this.spinner.show(SpinnerType.Timer);
-      const td: HTMLTableCellElement = this.element.nativeElement;
-      await this.httpClientService.delete({ controller: this.requestParameters.controller }, this.id).subscribe(data => {
-        $(td.parentElement).animate({
-          opacity: 0,
-          left: "+= 50",
-          height: "toggle"
-        }, 700, () => {
-          this.callback.emit();
-          this.alertifyService.message("Ürün Silinmiştir", { dismissOther : true, messageType: MessageType.Success, position: Position.TopCenter })
+    this.dialogService.openDialog({
+      componentType: DeleteDialogComponent,
+      data: DeleteState.Yes,
+      afterClosed: async () => {
+        this.spinner.show(SpinnerType.Timer);
+        const td: HTMLTableCellElement = this.element.nativeElement;
+        await this.httpClientService.delete({ controller: this.requestParameters.controller }, this.id).subscribe(data => {
+          $(td.parentElement).animate({
+            opacity: 0,
+            left: "+= 50",
+            height: "toggle"
+          }, 700, () => {
+            this.callback.emit();
+            this.alertifyService.message("Ürün Silinmiştir", { dismissOther: true, messageType: MessageType.Success, position: Position.TopCenter })
+          });
+        }, (errorResponse: HttpErrorResponse) => {
+          this.spinner.hide(SpinnerType.Timer);
+          this.alertifyService.message(errorResponse.message, { dismissOther: true, messageType: MessageType.Error, position: Position.TopCenter });
         });
-      }, (errorResponse: HttpErrorResponse) => {
-        this.spinner.hide(SpinnerType.Timer);
-        this.alertifyService.message(errorResponse.message, { dismissOther: true, messageType: MessageType.Error, position: Position.TopCenter });
-      });
-    });
+      }
+    })
   }
 
   //async onclick() {
@@ -64,16 +69,16 @@ export class DeleteDirective {
   //  });
   //}
 
-  openDialog(afterClosed: any): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '250px',
-      data: DeleteState.Yes
-    });
+  //openDialog(afterClosed: any): void {
+  //  const dialogRef = this.dialog.open(DeleteDialogComponent, {
+  //    width: '250px',
+  //    data: DeleteState.Yes
+  //  });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == DeleteState.Yes) {
-        afterClosed();
-      }
-    });
-  }
+  //  dialogRef.afterClosed().subscribe(result => {
+  //    if (result == DeleteState.Yes) {
+  //      afterClosed();
+  //    }
+  //  });
+  //}
 }

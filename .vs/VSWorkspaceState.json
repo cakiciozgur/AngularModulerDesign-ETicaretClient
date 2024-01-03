@@ -6,13 +6,11 @@
     "\\src\\app\\admin",
     "\\src\\app\\admin\\components",
     "\\src\\app\\admin\\components\\product",
-    "\\src\\app\\dialogs",
-    "\\src\\app\\dialogs\\delete-dialog",
+    "\\src\\app\\admin\\components\\product\\create",
     "\\src\\app\\services",
     "\\src\\app\\services\\common",
-    "\\src\\app\\services\\common\\models",
-    "\\src\\assets"
+    "\\src\\app\\services\\common\\file-upload"
   ],
-  "SelectedNode": "\\src\\app\\dialogs\\delete-dialog\\delete-dialog.component.html",
+  "SelectedNode": "\\src\\app\\admin\\components\\product\\create\\create.component.scss",
   "PreviewInSolutionExplorer": false
 }
