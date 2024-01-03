@@ -3,13 +3,16 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\admin\\components\\product\\list",
-    "\\src\\app\\directives",
-    "\\src\\app\\directives\\admin",
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\components",
+    "\\src\\app\\admin\\components\\product",
+    "\\src\\app\\dialogs",
+    "\\src\\app\\dialogs\\delete-dialog",
     "\\src\\app\\services",
     "\\src\\app\\services\\common",
-    "\\src\\app\\services\\common\\models"
+    "\\src\\app\\services\\common\\models",
+    "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\directives\\admin\\delete.directive.ts",
+  "SelectedNode": "\\src\\app\\dialogs\\delete-dialog\\delete-dialog.component.html",
   "PreviewInSolutionExplorer": false
 }
