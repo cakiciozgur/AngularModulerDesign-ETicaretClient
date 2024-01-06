@@ -1,12 +1,12 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { NgxFileDropEntry } from 'ngx-file-drop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-
   constructor(private dialog: MatDialog,
 ) { }
 

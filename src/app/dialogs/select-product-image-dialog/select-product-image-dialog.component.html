@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Product Images</h2>
+<mat-dialog-content class="mat-typography">
+  <app-file-upload [fileUploadOptions]="fileUploadOptions"></app-file-upload>
+
+  <hr />
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Images
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ panelOpenState ? 'Hide' : 'Click to View' }} Images
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="images && images.length > 0">
+      <mat-card class="product-image-card" *ngFor="let image of images">
+        <mat-card-header>
+        </mat-card-header>
+        <img mat-card-image src="{{ image.path }}" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+        </mat-card-content>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+          <button mat-mini-fab color="primary" (click) ="deleteImage(image.id,$event)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

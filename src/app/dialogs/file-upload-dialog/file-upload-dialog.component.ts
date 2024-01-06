@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NgxFileDropEntry } from 'ngx-file-drop';
 
 @Component({
   selector: 'app-file-upload-dialog',
@@ -15,7 +16,6 @@ export class FileUploadDialogComponent extends BaseDialog<FileUploadDialogCompon
   {
     super(dialogRef);
   }
-
 }
 
 export enum FileUploadDialogState {

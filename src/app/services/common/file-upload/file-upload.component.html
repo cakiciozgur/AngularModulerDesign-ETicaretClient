@@ -1,11 +1,15 @@
 <div class="center">
   <ngx-file-drop dropZoneLabel="Drop files here" [accept]="fileUploadOptions.accept" (onFileDrop)="selectedFiles($event)">
     <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-      {{fileUploadOptions.explanation}}
-      <button type="button" (click)="openFileSelector()">Seç</button>
+      
+      <div>
+        <img src="{../../../assets/drag_drop.png" /><br />
+        <strong>{{fileUploadOptions.explanation}}</strong><br />
+        <button type="button" class="btn btnIcon1 mt-2 mb-5 mx-auto px-5" (click)="openFileSelector()">Seç</button>
+      </div>
     </ng-template>
   </ngx-file-drop>
-  <div class="upload-table" *ngIf="files" >
+  <div class="upload-table" *ngIf="files">
     <table class="table">
       <thead>
         <tr>

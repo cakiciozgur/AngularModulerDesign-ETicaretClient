@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { HttpClientService } from '../http-client.service';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -7,6 +7,8 @@ import { AlertifyService, MessageType, Position } from '../../admin/alertify.ser
 import { MatDialog } from '@angular/material/dialog';
 import { FileUploadDialogComponent, FileUploadDialogState } from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { DialogService } from '../dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from '../../../base/base.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -20,16 +22,15 @@ export class FileUploadComponent {
     private toastrService: CustomeToastrService,
     private alertifyService: AlertifyService,
     private dialog: MatDialog,
-    private dialogService: DialogService) {
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService) {
   }
   public files: NgxFileDropEntry[];
-
   @Input() fileUploadOptions: Partial<FileUploadOptions>
 
   public selectedFiles(files: NgxFileDropEntry[]) {
     this.files = files;
     const fileData: FormData = new FormData();
-
     for (const file of files) {
 
       (file.fileEntry as FileSystemFileEntry).file((_file: File) => {
@@ -41,6 +42,7 @@ export class FileUploadComponent {
       componentType: FileUploadDialogComponent,
       data: FileUploadDialogState.Yes,
       afterClosed: () => {
+        this.spinner.show(SpinnerType.Timer)
         this.httpClientService.post({
           controller: this.fileUploadOptions.controller,
           action: this.fileUploadOptions.action,
@@ -49,6 +51,7 @@ export class FileUploadComponent {
         }, fileData).subscribe(data => {
 
           const message: string = "Dosyalar başarıyla yüklenmiştir";
+          this.spinner.hide(SpinnerType.Timer)
 
           if (this.fileUploadOptions.isAdminPage) {
             this.alertifyService.message(message, { dismissOther: true, messageType: MessageType.Success, position: Position.TopCenter })

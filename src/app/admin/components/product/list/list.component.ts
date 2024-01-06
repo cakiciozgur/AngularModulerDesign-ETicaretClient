@@ -6,7 +6,9 @@ import { BaseComponent, SpinnerType } from '../../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { RequestParameters } from '../../../../services/common/http-client.service';
+import { HttpClientService, RequestParameters } from '../../../../services/common/http-client.service';
+import { DialogService } from '../../../../services/common/dialog.service';
+import { SelectImageDialogState, SelectProductImageDialogComponent } from '../../../../dialogs/select-product-image-dialog/select-product-image-dialog.component';
 
 declare var $: any;
 
@@ -17,11 +19,15 @@ declare var $: any;
 })
 export class ListComponent extends BaseComponent {
 
-  constructor(private productService: ProductService, spinner: NgxSpinnerService, private alertifyService: AlertifyService) {
+  constructor(private productService: ProductService,
+    spinner: NgxSpinnerService,
+    private alertifyService: AlertifyService,
+    private dialogService: DialogService,
+    private httpClientService: HttpClientService) {
     super(spinner)
   }
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate', 'photos', 'edit', 'delete'];
 
   dataSource: MatTableDataSource<List_Product> = null;
 
@@ -50,5 +56,16 @@ export class ListComponent extends BaseComponent {
   }
   requestParameters : RequestParameters = {
     controller : "products"
+  }
+
+
+  addProductImages(id: string) {
+    this.dialogService.openDialog({
+      componentType: SelectProductImageDialogComponent,
+      data: id,
+      options: {
+        width: "1200px"
+      }
+    })
   }
 }
