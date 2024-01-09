@@ -4,41 +4,41 @@
     <div class="container mt-5">
       <form [formGroup]="kullaniciForm" (ngSubmit)="submitForm(kullaniciForm.value)">
         <div class="mb-3">
-          <label for="adSoyad" class="form-label">Ad Soyad</label>
-          <input type="text" class="form-control" id="adSoyad" formControlName="adSoyad" [ngClass]="{'is-invalid': isFieldInvalid('adSoyad')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('adSoyad')">
+          <label for="nameSurname" class="form-label">Ad Soyad</label>
+          <input type="text" class="form-control" id="nameSurname" formControlName="nameSurname" [ngClass]="{'is-invalid': isFieldInvalid('nameSurname')}">
+          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('nameSurname')">
             Ad Soyad boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="mb-3">
-          <label for="kullaniciAdi" class="form-label">Kullanıcı Adı</label>
-          <input type="text" formControlName="kullaniciAdi" class="form-control" id="kullaniciAdi" [ngClass]="{'is-invalid': isFieldInvalid('kullaniciAdi')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('kullaniciAdi')">
+          <label for="username" class="form-label">Kullanıcı Adı</label>
+          <input type="text" formControlName="username" class="form-control" id="username" [ngClass]="{'is-invalid': isFieldInvalid('username')}">
+          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('username')">
             Kullanıcı Adı boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="mb-3">
-          <label for="eposta" class="form-label">E-posta</label>
-          <input type="eposta" formControlName="eposta" class="form-control" id="eposta" [ngClass]="{'is-invalid': isFieldInvalid('eposta')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('eposta')">
+          <label for="email" class="form-label">E-posta</label>
+          <input type="email" formControlName="email" class="form-control" id="email" [ngClass]="{'is-invalid': isFieldInvalid('email')}">
+          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('email')">
             Lütfen geçerli bir e-posta giriniz!
           </div>
         </div>
 
         <div class="mb-3">
-          <label for="sifre" class="form-label">Şifre</label>
-          <input type="password" formControlName="sifre" class="form-control" id="sifre" [ngClass]="{'is-invalid': isFieldInvalid('sifre')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('sifre')">
+          <label for="password" class="form-label">Şifre</label>
+          <input type="password" formControlName="password" class="form-control" id="password" [ngClass]="{'is-invalid': isFieldInvalid('password')}">
+          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('password')">
             Şifre boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="mb-3">
-          <label for="sifreTekrar" class="form-label">Şifre Tekrar</label>
-          <input type="password" formControlName="sifreTekrar" class="form-control" id="sifreTekrar" [ngClass]="{'is-invalid': isFieldInvalid('sifreTekrar')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('sifreTekrar')">
+          <label for="passwordConfirm" class="form-label">Şifre Tekrar</label>
+          <input type="password" formControlName="passwordConfirm" class="form-control" id="passwordConfirm" [ngClass]="{'is-invalid': isFieldInvalid('passwordConfirm')}">
+          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('passwordConfirm')">
             Şifre Tekrar boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
           <div class="alert alert-danger mt-1" role="alert"  *ngIf="kullaniciForm.hasError('passwordMismatch')">
