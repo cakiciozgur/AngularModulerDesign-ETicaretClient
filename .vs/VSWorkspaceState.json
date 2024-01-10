@@ -4,12 +4,12 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\contracts",
-    "\\src\\app\\dialogs",
-    "\\src\\app\\dialogs\\delete-dialog",
-    "\\src\\app\\dialogs\\file-upload-dialog",
-    "\\src\\app\\services",
-    "\\src\\app\\services\\common",
-    "\\src\\app\\services\\common\\models"
+    "\\src\\app\\contracts\\users",
+    "\\src\\app\\ui",
+    "\\src\\app\\ui\\components",
+    "\\src\\app\\ui\\components\\login",
+    "\\src\\app\\ui\\components\\register"
   ],
+  "SelectedNode": "\\src\\app\\entities",
   "PreviewInSolutionExplorer": false
 }

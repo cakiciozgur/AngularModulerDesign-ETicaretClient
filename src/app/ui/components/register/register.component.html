@@ -1,55 +1,55 @@
-<div class="row">
-  <div class="col-md-3"></div>
+<div class="row justify-content-center">
   <div class="col-md-6">
     <div class="container mt-5">
-      <form [formGroup]="kullaniciForm" (ngSubmit)="submitForm(kullaniciForm.value)">
+      <form [formGroup]="kullaniciForm" (ngSubmit)="submitForm(kullaniciForm.value)" class="bg-light p-4 rounded shadow">
+        <h2 class="text-center mb-4">Registration</h2>
         <div class="mb-3">
           <label for="nameSurname" class="form-label">Ad Soyad</label>
-          <input type="text" class="form-control" id="nameSurname" formControlName="nameSurname" [ngClass]="{'is-invalid': isFieldInvalid('nameSurname')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('nameSurname')">
+          <input type="text" class="form-control smaller-alert" id="nameSurname" formControlName="nameSurname" [ngClass]="{'is-invalid': isFieldInvalid('nameSurname')}">
+          <div class="invalid-feedback smaller-alert" *ngIf="isFieldInvalid('nameSurname')">
             Ad Soyad boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="mb-3">
           <label for="username" class="form-label">Kullanıcı Adı</label>
-          <input type="text" formControlName="username" class="form-control" id="username" [ngClass]="{'is-invalid': isFieldInvalid('username')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('username')">
+          <input type="text" formControlName="username" class="form-control smaller-alert" id="username" [ngClass]="{'is-invalid': isFieldInvalid('username')}">
+          <div class="invalid-feedback smaller-alert" *ngIf="isFieldInvalid('username')">
             Kullanıcı Adı boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="mb-3">
           <label for="email" class="form-label">E-posta</label>
-          <input type="email" formControlName="email" class="form-control" id="email" [ngClass]="{'is-invalid': isFieldInvalid('email')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('email')">
+          <input type="email" formControlName="email" class="form-control smaller-alert" id="email" [ngClass]="{'is-invalid': isFieldInvalid('email')}">
+          <div class="invalid-feedback smaller-alert" *ngIf="isFieldInvalid('email')">
             Lütfen geçerli bir e-posta giriniz!
           </div>
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Şifre</label>
-          <input type="password" formControlName="password" class="form-control" id="password" [ngClass]="{'is-invalid': isFieldInvalid('password')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('password')">
+          <input type="password" formControlName="password" class="form-control smaller-alert" id="password" [ngClass]="{'is-invalid': isFieldInvalid('password')}">
+          <div class="invalid-feedback smaller-alert" *ngIf="isFieldInvalid('password')">
             Şifre boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="mb-3">
           <label for="passwordConfirm" class="form-label">Şifre Tekrar</label>
-          <input type="password" formControlName="passwordConfirm" class="form-control" id="passwordConfirm" [ngClass]="{'is-invalid': isFieldInvalid('passwordConfirm')}">
-          <div class="alert alert-danger mt-1 invalid-feedback" role="alert" *ngIf="isFieldInvalid('passwordConfirm')">
+          <input type="password" formControlName="passwordConfirm" class="form-control smaller-alert" id="passwordConfirm" [ngClass]="{'is-invalid': isFieldInvalid('passwordConfirm')}">
+          <div class="invalid-feedback smaller-alert" *ngIf="isFieldInvalid('passwordConfirm')">
             Şifre Tekrar boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
-          <div class="alert alert-danger mt-1" role="alert"  *ngIf="kullaniciForm.hasError('passwordMismatch')">
+          <div class="invalid-feedback smaller-alert" *ngIf="kullaniciForm.hasError('passwordMismatch')">
             Şifreler eşleşmiyor!
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </div>
       </form>
     </div>
   </div>
-  <div class="col-md-3"></div>
 </div>
-
