@@ -27,6 +27,7 @@ export class UserService {
       action: "login"
     }, loginUser);
 
+    debugger;
     return await firstValueFrom(obsLoginUser) as Login_User_Response;
     callBackFunction();
   }

@@ -39,8 +39,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
     if (this.loginForm.valid) {
       this.showSpinner(SpinnerType.Timer);
       const result: Login_User_Response = await this.userService.login(data, () => this.hideSpinner(SpinnerType.Timer));
+      console.log(result.token);
+      debugger;
       if (result.success) {
-        this.toastrService.message(result.message, "Giriş Başarılı", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight })
+
+        localStorage.setItem("accessToken", result.token.accessToken);
+
+        this.toastrService.message(result.message, "Giriş Başarılı", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut:2000 })
       }
       else {
         this.toastrService.message(result.message, "Başarısız", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })

@@ -5,11 +5,12 @@
     "\\src\\app",
     "\\src\\app\\contracts",
     "\\src\\app\\contracts\\users",
+    "\\src\\app\\contracts\\users\\token",
     "\\src\\app\\ui",
     "\\src\\app\\ui\\components",
     "\\src\\app\\ui\\components\\login",
     "\\src\\app\\ui\\components\\register"
   ],
-  "SelectedNode": "\\src\\app\\entities",
+  "SelectedNode": "\\src\\app\\contracts\\users\\token\\token.ts",
   "PreviewInSolutionExplorer": false
 }
