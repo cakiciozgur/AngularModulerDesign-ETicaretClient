@@ -5,13 +5,14 @@ import { Create_User } from '../../../contracts/users/create_user';
 import { Observable, firstValueFrom } from 'rxjs';
 import { Login_User_Request } from '../../../entities/login_user_request';
 import { Login_User_Response } from '../../../contracts/users/login_user_response';
+import { ToastrMessageType, ToastrPosition, CustomeToastrService } from '../../ui/custome-toastr.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private httpClientService: HttpClientService) { }
+  constructor(private httpClientService: HttpClientService, private toastrService: CustomeToastrService) { }
 
   async create(user: User): Promise<Create_User>{
     const obsUser: Observable<Create_User | User> = this.httpClientService.post<Create_User | User>({
@@ -21,14 +22,20 @@ export class UserService {
     return await firstValueFrom(obsUser) as Create_User;
   }
 
-  async login(loginUser: Login_User_Request, callBackFunction?: () => void): Promise<Login_User_Response> {
-    const obsLoginUser: Observable<Login_User_Response | Login_User_Request> = this.httpClientService.post<Login_User_Request>({
+  async login(loginUser: Login_User_Request, callBackFunction?: () => void): Promise<any> {
+    const obsLoginUser: Observable<Login_User_Request | Login_User_Response> = this.httpClientService.post<any | Login_User_Request>({
       controller: "users",
       action: "login"
     }, loginUser);
-
-    debugger;
-    return await firstValueFrom(obsLoginUser) as Login_User_Response;
+    
+    const response: Login_User_Response = await firstValueFrom(obsLoginUser) as Login_User_Response;
+    if (response.success) {
+      
+      localStorage.setItem("accessToken", response.token.accessToken);
+      this.toastrService.message(response.message, "Giriş Başarılı", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut: 2000 })
+    } else {
+      this.toastrService.message(response.message, "Başarısız", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })
+    }
     callBackFunction();
   }
 }

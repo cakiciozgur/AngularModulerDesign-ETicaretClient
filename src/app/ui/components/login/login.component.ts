@@ -6,6 +6,8 @@ import { Login_User_Request } from '../../../entities/login_user_request';
 import { BaseComponent, SpinnerType } from '../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Login_User_Response } from '../../../contracts/users/login_user_response';
+import { AuthService } from '../../../services/common/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   loginForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService, private toastrService: CustomeToastrService, spinner: NgxSpinnerService)
+  constructor(private fb: FormBuilder, private userService: UserService, private toastrService: CustomeToastrService, spinner: NgxSpinnerService, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router)
   {
     super(spinner);
   }
@@ -38,18 +40,18 @@ export class LoginComponent extends BaseComponent implements OnInit {
     console.log("-----------",this.loginForm);
     if (this.loginForm.valid) {
       this.showSpinner(SpinnerType.Timer);
-      const result: Login_User_Response = await this.userService.login(data, () => this.hideSpinner(SpinnerType.Timer));
-      console.log(result.token);
-      debugger;
-      if (result.success) {
+      //debugger;
+      await this.userService.login(data, () => {
+        this.authService.identityCheck();
 
-        localStorage.setItem("accessToken", result.token.accessToken);
-
-        this.toastrService.message(result.message, "Giriş Başarılı", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut:2000 })
-      }
-      else {
-        this.toastrService.message(result.message, "Başarısız", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })
-      }
+        this.activatedRoute.queryParams.subscribe(params => {
+          const returnUrl: string = params["returnUrl"];
+          if (returnUrl) {
+            this.router.navigate([returnUrl]);
+          }
+        })
+        this.hideSpinner(SpinnerType.Timer);
+      });
     }
   }
 
