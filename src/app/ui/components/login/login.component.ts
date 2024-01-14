@@ -8,6 +8,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Login_User_Response } from '../../../contracts/users/login_user_response';
 import { AuthService } from '../../../services/common/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { HttpClientService } from '../../../services/common/http-client.service';
+import { User } from '../../../entities/user';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +21,24 @@ export class LoginComponent extends BaseComponent implements OnInit {
   loginForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService, private toastrService: CustomeToastrService, spinner: NgxSpinnerService, private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router)
+  constructor(private fb: FormBuilder,
+    private userService: UserService,
+    private toastrService: CustomeToastrService,
+    spinner: NgxSpinnerService,
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    socialAutService: SocialAuthService)
   {
     super(spinner);
+    socialAutService.authState.subscribe(async (user: SocialUser) => {
+      this.showSpinner(SpinnerType.BallScaleRipple);
+      await userService.googleLogin(user, () => {
+        this.authService.identityCheck();
+        console.log(user);
+        this.hideSpinner(SpinnerType.BallScaleRipple);
+      });
+    })
   }
 
   ngOnInit() {
@@ -32,7 +50,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       usernameOrEmail: ['', [Validators.required]],
       password: ['', [Validators.required,
       Validators.maxLength(50),
-      Validators.minLength(6)]]
+      Validators.minLength(3)]]
     });
   }
 

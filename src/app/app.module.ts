@@ -14,10 +14,14 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
 import { FileUploadDialogComponent } from './dialogs/file-upload-dialog/file-upload-dialog.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginComponent } from './ui/components/login/login.component';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekleyin
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -36,11 +40,36 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         allowedDomains: ["localhost:7034"],
         disallowedRoutes: [], // kesinlikle gönderilmemesi gereken adresli giriyoruz.
       }
-    })
+    }),
+    SocialLoginModule,
+    GoogleSigninButtonModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),
-    { provide: "baseUrl", useValue: "https://localhost:7034/api", multi : true}
+    { provide: "baseUrl", useValue: "https://localhost:7034/api", multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              "82.apps.googleusercontent.com"
+            )
+          }
+          //{
+          //  id: FacebookLoginProvider.PROVIDER_ID,
+          //  provider: new FacebookLoginProvider('clientId')
+          //}
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+
   ],
   bootstrap: [AppComponent]
 })

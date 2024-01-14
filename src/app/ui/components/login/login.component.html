@@ -15,12 +15,15 @@
           <label for="password" class="form-label">Şifre</label>
           <input type="password" formControlName="password" class="form-control smaller-alert" id="password" [ngClass]="{'is-invalid': isFieldInvalid('password')}">
           <div class="invalid-feedback smaller-alert" *ngIf="isFieldInvalid('password')">
-            Şifre boş geçilemez ve 6-50 karakter aralığında olmalıdır!
+            Şifre boş geçilemez ve 3-50 karakter aralığında olmalıdır!
           </div>
         </div>
 
         <div class="d-grid">
           <button type="submit" class="btn btn-primary">Giriş Yap</button>
+        </div>
+        <div class="mt-2">
+          <asl-google-signin-button></asl-google-signin-button>
         </div>
       </form>
     </div>

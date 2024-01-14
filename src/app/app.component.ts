@@ -18,7 +18,7 @@ export class AppComponent {
     localStorage.removeItem("accessToken");
     this.authService.identityCheck();
     this.router.navigate([""]);
-    this.toastrService.message("", "Oturum Kapatıldı", { messageType: ToastrMessageType.Warning, position: ToastrPosition.TopRight, timeOut: 2000 });
+    this.toastrService.message("", "Oturum Kapatıldı", { messageType: ToastrMessageType.Warning, position: ToastrPosition.TopRight, timeOut:2000 });
   }
 }
 
