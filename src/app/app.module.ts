@@ -15,7 +15,7 @@ import { FileUploadDialogComponent } from './dialogs/file-upload-dialog/file-upl
 import { JwtModule } from '@auth0/angular-jwt';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './ui/components/login/login.component';
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule, FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekleyin
 
 @NgModule({
@@ -56,13 +56,13 @@ import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekl
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              "82.apps.googleusercontent.com"
+              "619287932343-.apps.googleusercontent.com"
             )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('619287932343')
           }
-          //{
-          //  id: FacebookLoginProvider.PROVIDER_ID,
-          //  provider: new FacebookLoginProvider('clientId')
-          //}
         ],
         onError: (err) => {
           console.error(err);

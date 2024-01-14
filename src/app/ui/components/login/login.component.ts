@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/common/models/user.service';
-import { CustomeToastrService, ToastrMessageType, ToastrPosition } from '../../../services/ui/custome-toastr.service';
 import { Login_User_Request } from '../../../entities/login_user_request';
 import { BaseComponent, SpinnerType } from '../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Login_User_Response } from '../../../contracts/users/login_user_response';
 import { AuthService } from '../../../services/common/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { HttpClientService } from '../../../services/common/http-client.service';
-import { User } from '../../../entities/user';
+import { FacebookLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -23,22 +19,30 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
-    private toastrService: CustomeToastrService,
     spinner: NgxSpinnerService,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    socialAutService: SocialAuthService)
+    private socialAutService: SocialAuthService)
   {
     super(spinner);
     socialAutService.authState.subscribe(async (user: SocialUser) => {
       this.showSpinner(SpinnerType.BallScaleRipple);
-      await userService.googleLogin(user, () => {
-        this.authService.identityCheck();
-        console.log(user);
-        this.hideSpinner(SpinnerType.BallScaleRipple);
-      });
-    })
+      switch (user.provider) {
+        case "GOOGLE":
+          await this.userService.googleLogin(user, () => {
+            this.authService.identityCheck();
+            this.hideSpinner(SpinnerType.BallScaleRipple);
+          });
+          break;
+        case "FACEBOOK":
+          await this.userService.facebookLogin(user, () => {
+            this.authService.identityCheck();
+            this.hideSpinner(SpinnerType.BallScaleRipple);
+          });
+          break;
+      }
+    });
   }
 
   ngOnInit() {
@@ -55,7 +59,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   async submitLogin(data: Login_User_Request) {
-    console.log("-----------",this.loginForm);
+    //console.log("-----------",this.loginForm);
     if (this.loginForm.valid) {
       this.showSpinner(SpinnerType.Timer);
       //debugger;
@@ -71,6 +75,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
         this.hideSpinner(SpinnerType.Timer);
       });
     }
+  }
+
+  async facebookLogin() {
+    this.socialAutService.signIn(FacebookLoginProvider.PROVIDER_ID)
   }
 
   get component() {
