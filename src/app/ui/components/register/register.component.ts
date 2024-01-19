@@ -57,7 +57,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       }
     }
     else{
-      console.log('Form geçerli değil', this.kullaniciForm.value);
+      //console.log('Form geçerli değil', this.kullaniciForm.value);
     }
   }
 

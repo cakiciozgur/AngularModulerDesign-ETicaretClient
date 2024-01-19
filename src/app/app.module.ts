@@ -8,7 +8,7 @@ import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DeleteDirective } from './directives/admin/delete.directive';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from './dialogs/file-upload-dialog/file-upload-dialog.component';
@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './ui/components/login/login.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule, FacebookLoginProvider } from '@abacritt/angularx-social-login';
 import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekleyin
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -56,8 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekl
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              "619287932343.apps.googleusercontent.com"
-            )
+              "619287932343.apps.googleusercontent.com")
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
@@ -68,8 +68,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekl
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
-
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi : true }
   ],
   bootstrap: [AppComponent]
 })
