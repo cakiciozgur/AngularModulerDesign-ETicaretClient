@@ -25,6 +25,7 @@ export class UserAuthService {
     if (response.success) {
 
       localStorage.setItem("accessToken", response.token.accessToken);
+      localStorage.setItem("refreshToken", response.token.refreshToken);
       this.toastrService.message(response.message, "Giriş Başarılı", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut: 2000 })
     } else {
       this.toastrService.message(response.message, "Başarısız", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })
@@ -43,6 +44,25 @@ export class UserAuthService {
     //debugger;
     if (response.token.accessToken) {
       localStorage.setItem("accessToken", response.token.accessToken);
+      localStorage.setItem("refreshToken", response.token.refreshToken);
+      this.toastrService.message("Google Login Success", "Succeded", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut: 2000 })
+    } else {
+      this.toastrService.message("Google Login Error", "Error", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })
+    }
+    callBackFunction();
+  }
+
+  async refreshTokenLogin(refreshToken: string, callBackFunction?: () => void): Promise<any> {
+    const obsRefreshTokenLogin: Observable<any | TokenResponse> = this.httpClientService.post<any | TokenResponse>({
+      controller: "auth",
+      action: "refreshtokenlogin"
+    }, { refreshToken: refreshToken });
+
+    const response: TokenResponse = await firstValueFrom(obsRefreshTokenLogin) as TokenResponse;
+    //debugger;
+    if (response.token.accessToken) {
+      localStorage.setItem("accessToken", response.token.accessToken);
+      localStorage.setItem("refreshToken", response.token.refreshToken);
       this.toastrService.message("Google Login Success", "Succeded", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut: 2000 })
     } else {
       this.toastrService.message("Google Login Error", "Error", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })
@@ -60,6 +80,7 @@ export class UserAuthService {
     //debugger;
     if (response.token.accessToken) {
       localStorage.setItem("accessToken", response.token.accessToken);
+      localStorage.setItem("refreshToken", response.token.refreshToken);
       this.toastrService.message("Facebook Login Success", "Succeded", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut: 2000 })
     } else {
       this.toastrService.message("Facebook Login Error", "Error", { messageType: ToastrMessageType.Error, position: ToastrPosition.TopRight })
