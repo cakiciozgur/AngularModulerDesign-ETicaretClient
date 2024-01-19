@@ -22,5 +22,4 @@ export const authGuard: CanActivateFn = (route /*// route hangi urlden geldiğim
 
   spinner.hide(SpinnerType.BallClipRotatePulse);
   return true;
-
 };

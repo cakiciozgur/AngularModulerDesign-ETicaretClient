@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../../services/common/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FacebookLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { UserAuthService } from '../../../services/common/models/user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private userService: UserService,
+    private userAuthService: UserAuthService,
     spinner: NgxSpinnerService,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
@@ -30,13 +31,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.showSpinner(SpinnerType.BallScaleRipple);
       switch (user.provider) {
         case "GOOGLE":
-          await this.userService.googleLogin(user, () => {
+          await this.userAuthService.googleLogin(user, () => {
             this.authService.identityCheck();
             this.hideSpinner(SpinnerType.BallScaleRipple);
           });
           break;
         case "FACEBOOK":
-          await this.userService.facebookLogin(user, () => {
+          await this.userAuthService.facebookLogin(user, () => {
             this.authService.identityCheck();
             this.hideSpinner(SpinnerType.BallScaleRipple);
           });
@@ -63,7 +64,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
     if (this.loginForm.valid) {
       this.showSpinner(SpinnerType.Timer);
       //debugger;
-      await this.userService.login(data, () => {
+      await this.userAuthService.login(data, () => {
         this.authService.identityCheck();
 
         this.activatedRoute.queryParams.subscribe(params => {

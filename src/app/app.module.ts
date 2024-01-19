@@ -56,7 +56,7 @@ import { ReactiveFormsModule } from '@angular/forms'; // ReactiveFormsModule ekl
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              "619287932343-.apps.googleusercontent.com"
+              "619287932343.apps.googleusercontent.com"
             )
           },
           {
