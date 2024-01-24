@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'ETicaretClient';
-  constructor(public authService: AuthService, private toastrService: CustomeToastrService, private router : Router) {
+  constructor(public authService: AuthService, private toastrService: CustomeToastrService, private router: Router) {
     authService.identityCheck();
   }
   signOut() {

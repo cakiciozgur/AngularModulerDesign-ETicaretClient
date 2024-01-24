@@ -11,7 +11,7 @@ export class AuthService {
 
   identityCheck() {
 
-    const token: string = (typeof window !== "undefined") ? localStorage.getItem("accessToken") : null;
+    const token: string = (typeof window !== "undefined" && window.localStorage) ? localStorage.getItem("accessToken") : null;
     let expired: boolean = true; // token bitiş süresi => true ise süre dolmuş yeni token almalı (login olmalı)
 
     try {

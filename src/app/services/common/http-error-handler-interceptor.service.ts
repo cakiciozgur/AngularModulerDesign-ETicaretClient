@@ -16,7 +16,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
           case HttpStatusCode.Unauthorized:
             this.toastrService.message("Unauthorized Access", "Authorization", { position: ToastrPosition.BottomFullWidth, messageType: ToastrMessageType.Warning, timeOut: 3000 })
 
-            const refreshToken = (typeof window !== "undefined") ? localStorage.getItem("accessToken") : null;
+            const refreshToken = (typeof window !== "undefined" && window.localStorage) ? localStorage.getItem("refreshToken") : null;
             this.userAuthService.refreshTokenLogin(refreshToken).then(data => {
 
             });

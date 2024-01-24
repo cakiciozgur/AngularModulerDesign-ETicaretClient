@@ -37,7 +37,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     FlexLayoutModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem("accessToken"),
+        tokenGetter: () => (typeof window !== "undefined" && window.localStorage) ? localStorage.getItem("accessToken") : null,
         allowedDomains: ["localhost:7034"],
         disallowedRoutes: [], // kesinlikle gönderilmemesi gereken adresli giriyoruz.
       }
@@ -69,7 +69,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
         }
       } as SocialAuthServiceConfig,
     },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi : true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
