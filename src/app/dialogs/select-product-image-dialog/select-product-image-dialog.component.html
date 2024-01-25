@@ -16,12 +16,13 @@
     <div *ngIf="images && images.length > 0">
       <mat-card class="product-image-card" *ngFor="let image of images">
         <mat-card-header>
+          <mat-radio-button name="img" class="example-margin" (click)="showCase(image.id)" [checked]="image.showcase" >Showcase</mat-radio-button>
         </mat-card-header>
         <img mat-card-image src="{{ image.path }}" alt="Photo of a Shiba Inu">
         <mat-card-content>
         </mat-card-content>
         <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-          <button mat-mini-fab color="primary" (click) ="deleteImage(image.id,$event)">
+          <button mat-mini-fab color="primary" (click)="deleteImage(image.id,$event)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-card-actions>
@@ -31,6 +32,6 @@
 </mat-accordion>
 
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions class="justify-content-end">
   <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

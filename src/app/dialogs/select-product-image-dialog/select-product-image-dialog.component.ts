@@ -57,11 +57,16 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
         });
       }
     })
-
-
   }
 
   panelOpenState = false;
+
+  showCase(imageId: string) {
+    this.spinner.show();
+    this.productService.changeShowcaseImage(imageId, this.data as string, () => {
+      this.spinner.hide();
+    })
+  }
 
 }
 
