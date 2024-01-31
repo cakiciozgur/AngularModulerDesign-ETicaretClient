@@ -26,38 +26,38 @@
                  routerLink="products">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="basket">Basket</a>
+              <a class="nav-link active" aria-current="page" routerLink="admin" *ngIf="authService.isAuth">Admin Panel</a>
             </li>
 
             <!--<li class="nav-item">
-      <a class="nav-link active" aria-current="page" routerLink="login" *ngIf="!authService.isAuth">Login</a>
+  <a class="nav-link active" aria-current="page" routerLink="login" *ngIf="!authService.isAuth">Login</a>
     </li>-->
             <!--<li class="nav-item">
-      <a class="nav-link active" aria-current="page" style="color: red; cursor: pointer;" (click)="signOut()" *ngIf="authService.isAuth">Logout</a>
-    </li>-->
+    <a class="nav-link active" aria-current="page" style="color: red; cursor: pointer;" (click)="signOut()" *ngIf="authService.isAuth">Logout</a>
+  </li>-->
             <!--<li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle"
-         href="#"
-         role="button"
-         data-bs-toggle="dropdown"
-         aria-expanded="false">
-        Dropdown
-      </a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-    </li>-->
+    <a class="nav-link dropdown-toggle"
+       href="#"
+       role="button"
+       data-bs-toggle="dropdown"
+       aria-expanded="false">
+      Dropdown
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><hr class="dropdown-divider" /></li>
+      <li>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+  </li>-->
             <!--<li>
-      <a class="btn btn-outline-success" routerLink="admin" *ngIf="authService.isAuth"> Admin Panel </a>
-    </li>-->
+    <a class="btn btn-outline-success" routerLink="admin" *ngIf="authService.isAuth"> Admin Panel </a>
+  </li>-->
           </ul>
           <!--<form class="d-flex" role="search">
     <input class="form-control me-2"
@@ -72,13 +72,13 @@
           <button class="btn btn-outline-success me-1" routerLink="register" *ngIf="!authService.isAuth">
             Register
           </button>
-          <button class="btn btn-outline-primary me-1" routerLink="admin" *ngIf="authService.isAuth">
-            Admin Panel
+          <button class="btn btn-success me-1" *ngIf="authService.isAuth" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Basket
           </button>
           <button class="btn btn-success me-1" routerLink="login" *ngIf="!authService.isAuth">
             Login
           </button>
-          <button class="btn btn-danger me-1" (click)="signOut()" *ngIf="authService.isAuth">
+          <button class="btn btn-outline-danger me-1" (click)="signOut()" *ngIf="authService.isAuth">
             Logout
           </button>
         </div>
@@ -99,3 +99,5 @@
 <ngx-spinner size="default" name="spinner1" type="ball-scale-ripple"></ngx-spinner>
 <ngx-spinner size="default" name="spinner2" type="ball-clip-rotate-pulse"></ngx-spinner>
 <ngx-spinner size="default" name="spinner3" type="timer"></ngx-spinner>
+
+<app-basket></app-basket>

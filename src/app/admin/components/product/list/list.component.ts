@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { List_Product } from '../../../../contracts/list_product';
 import { ProductService } from '../../../../services/common/models/product.service';
 import { BaseComponent, SpinnerType } from '../../../../base/base.component';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -9,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { HttpClientService, RequestParameters } from '../../../../services/common/http-client.service';
 import { DialogService } from '../../../../services/common/dialog.service';
 import { SelectImageDialogState, SelectProductImageDialogComponent } from '../../../../dialogs/select-product-image-dialog/select-product-image-dialog.component';
+import { List_Product } from '../../../../contracts/product/list_product';
 
 declare var $: any;
 

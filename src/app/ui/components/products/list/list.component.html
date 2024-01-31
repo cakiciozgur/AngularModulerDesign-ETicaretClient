@@ -7,7 +7,7 @@
         <div class="card-body">
           <h5 class="card-title-bold">{{product.name}}</h5>
           <p class="card-text">{{product.price | currency:'₺' }}</p>
-          <a href="#" class="btn btn-primary">Add to basket</a>
+          <a class="btn btn-primary" (click)="addToBasket(product)" >Add to basket</a>
         </div>
       </div>
     </div>

@@ -1,18 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../../services/common/models/product.service';
-import { List_Product } from '../../../../contracts/list_product';
 import { ActivatedRoute } from '@angular/router';
 import { FileServiceService } from '../../../../services/common/models/file-service.service';
 import { StorageBaseUrl } from '../../../../contracts/storageBaseUrl';
+import { BasketService } from '../../../../services/common/models/basket.service';
+import { List_Product } from '../../../../contracts/product/list_product';
+import { BaseComponent, SpinnerType } from '../../../../base/base.component';
+import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
+import { Create_Basket_Item } from '../../../../contracts/basket/create_basket_item';
+import { CustomeToastrService, ToastrMessageType, ToastrPosition } from '../../../../services/ui/custome-toastr.service';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
-export class ListComponent implements OnInit {
+export class ListComponent extends BaseComponent implements OnInit {
 
-  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private fileService: FileServiceService) { }
+  constructor(private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
+    private fileService: FileServiceService,
+    private basketService: BasketService,
+    private toastrService: CustomeToastrService,
+    spinner: NgxSpinnerService)
+  {
+    super(spinner)
+  }
 
   productList: List_Product[];
   currentPageNo: number;
@@ -49,11 +62,12 @@ export class ListComponent implements OnInit {
   }
 
 
-  getPaginationArray() {
-
+  getPaginationArray()
+  {
     this.paginationArray = [];
 
-    if (this.totalPageCount >= 7) {
+    if (this.totalPageCount >= 7)
+    {
 
       if (this.currentPageNo - 3 <= 0) {
         for (let i = 1; i <= 7; i++) {
@@ -79,6 +93,15 @@ export class ListComponent implements OnInit {
       }
 
     }
+  }
 
+  async addToBasket(product: List_Product) {
+    this.showSpinner(SpinnerType.BallClipRotatePulse);
+    let item: Create_Basket_Item = new Create_Basket_Item();
+    item.productId = product.id;
+    item.qty = 1;
+    await this.basketService.add(item);
+    this.hideSpinner(SpinnerType.BallClipRotatePulse);
+    this.toastrService.message(`${product.name} sepete eklenmiştir`, "Başarılı", { messageType: ToastrMessageType.Success, position: ToastrPosition.TopRight, timeOut:3000 });
   }
 }

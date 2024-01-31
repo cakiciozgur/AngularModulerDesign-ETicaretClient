@@ -2,13 +2,13 @@ import { Component, Inject, OnInit, Output } from '@angular/core';
 import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FileUploadOptions } from '../../services/common/file-upload/file-upload.component';
-import { List_Product_Images } from '../../contracts/list_product_image';
 import { ProductService } from '../../services/common/models/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../base/base.component';
 import { MatCard } from '@angular/material/card';
 import { DialogService } from '../../services/common/dialog.service';
 import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
+import { List_Product_Images } from '../../contracts/product/list_product_image';
 
 declare var $: any
 
