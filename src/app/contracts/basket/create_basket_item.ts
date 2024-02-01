@@ -1,4 +1,4 @@
 export class Create_Basket_Item {
   productId: string;
-  qty: number;
+  quantity: number;
 }
