@@ -70,7 +70,7 @@
           <button class="btn btn-outline-success me-1" routerLink="register" *ngIf="!authService.isAuth">
             Register
           </button>
-          <button class="btn btn-success me-1" *ngIf="authService.isAuth" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="loadComponent()">
+          <button class="btn btn-success me-1" *ngIf="authService.isAuth" data-bs-toggle="modal" data-bs-target="#basketModal" (click)="loadComponent()">
             Basket
           </button>
           <button class="btn btn-success me-1" routerLink="login" *ngIf="!authService.isAuth">
@@ -98,7 +98,7 @@
 <ngx-spinner size="default" name="spinner2" type="ball-clip-rotate-pulse"></ngx-spinner>
 <ngx-spinner size="default" name="spinner3" type="timer"></ngx-spinner>
 
-<div class="modal fade modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal" id="basketModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <ng-template appDynamicLoadComponent></ng-template>
   </div>
