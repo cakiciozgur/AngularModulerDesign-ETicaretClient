@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Product Images</h2>
 <mat-dialog-content class="mat-typography">
-  <app-file-upload [fileUploadOptions]="fileUploadOptions"></app-file-upload>
+  <app-file-upload [fileUploadOptions]="fileUploadOptions" (callbackUploadImages)="getAllImages()"></app-file-upload>
 
   <hr />
 <mat-accordion>

@@ -28,6 +28,8 @@ export class FileUploadComponent {
   public files: NgxFileDropEntry[];
   @Input() fileUploadOptions: Partial<FileUploadOptions>
 
+  @Output() callbackUploadImages: EventEmitter<any> = new EventEmitter();
+
   public selectedFiles(files: NgxFileDropEntry[]) {
     this.files = files;
     const fileData: FormData = new FormData();
@@ -49,7 +51,7 @@ export class FileUploadComponent {
           queryString: this.fileUploadOptions.queryString,
           headers: new HttpHeaders({ "responseType": "blob" })
         }, fileData).subscribe(data => {
-
+          this.callbackUploadImages.emit();
           const message: string = "Dosyalar başarıyla yüklenmiştir";
           this.spinner.hide(SpinnerType.Timer)
 
@@ -59,7 +61,6 @@ export class FileUploadComponent {
           else {
             this.toastrService.message(message, "Başarılı", { position: ToastrPosition.BottomCenter, messageType: ToastrMessageType.Success })
           }
-
         }, (errorResponse: HttpErrorResponse) => {
 
           const errorMessage: string = "Dosyalar yüklenememiştir";

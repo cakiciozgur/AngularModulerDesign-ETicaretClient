@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FileUploadOptions } from '../../services/common/file-upload/file-upload.component';
+import { FileUploadComponent, FileUploadOptions } from '../../services/common/file-upload/file-upload.component';
 import { ProductService } from '../../services/common/models/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../base/base.component';
@@ -66,6 +66,10 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
     this.productService.changeShowcaseImage(imageId, this.data as string, () => {
       this.spinner.hide();
     })
+  }
+
+  async getAllImages(){
+    this.images = await this.productService.readImages(this.data as string, () => this.spinner.hide(SpinnerType.BallScaleRipple));
   }
 
 }
