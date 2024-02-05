@@ -41,3 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 /src/app/app.module.ts
+/.vs/ETicaretClient/FileContentIndex/bb7c0a87-4e36-41b0-917d-a369f43b8046.vsidx
