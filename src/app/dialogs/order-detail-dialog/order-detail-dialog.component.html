@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>Order Details</h2>
+<mat-dialog-content class="mat-typography">
+
+  <p>
+    <mat-toolbar color="primary">
+      <span>OrderNumber: {{singleOrder.orderCode}}</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+  </p>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 order-detail-table">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">{{element.price | currency:'₺' }}</td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+    </ng-container>
+
+    <!-- TotalPrice Column -->
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef>TotalPrice</th>
+      <td mat-cell *matCellDef="let element">{{(element.price * element.quantity) | currency:'₺'  }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row
+        (click)="clickedRows.add(row)"
+        [class.order-detail-row-is-clicked]="clickedRows.has(row)"
+        *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <p>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <span class="example-spacer"></span>
+        <span>Total Price: {{totalPrice | currency:'₺' }}</span>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <span>Address: {{singleOrder.address}}</span>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <span>Description: {{singleOrder.description}}</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </p>
+
+</mat-dialog-content>
+<mat-dialog-actions class="justify-content-end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Order Complete</button>
+</mat-dialog-actions>

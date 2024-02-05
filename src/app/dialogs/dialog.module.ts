@@ -14,18 +14,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { RemoveBasketItemDialogComponent } from './remove-basket-item-dialog/remove-basket-item-dialog.component';
 import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shopping-complete-dialog.component';
+import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
     RemoveBasketItemDialogComponent,
-    ShoppingCompleteDialogComponent
+    ShoppingCompleteDialogComponent,
+    OrderDetailDialogComponent
 
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule,
+    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule,
     FileUploadModule,
     FlexLayoutModule
   ],

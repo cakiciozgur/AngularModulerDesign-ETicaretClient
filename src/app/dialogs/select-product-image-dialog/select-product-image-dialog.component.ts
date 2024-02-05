@@ -40,7 +40,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
 
   async ngOnInit() {
     this.spinner.show(SpinnerType.BallScaleRipple);
-    this.images = await this.productService.readImages(this.data as string, () => this.spinner.hide(SpinnerType.BallScaleRipple));
+    this.getAllImages();
   }
 
 
