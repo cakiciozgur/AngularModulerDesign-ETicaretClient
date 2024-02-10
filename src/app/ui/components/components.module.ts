@@ -4,8 +4,8 @@ import { ProductsModule } from './products/products.module';
 import { HomeModule } from './home/home.module';
 import { BasketModule } from './basket/basket.module';
 import { RegisterModule } from './register/register.module';
-import { LoginModule } from './login/login.module';
-import { BasketComponent } from './basket/basket.component';
+import { PasswordResetModule } from './password-reset/password-reset.module';
+import { UpdatePasswordModule } from './update-password/update-password.module';
 
 
 
@@ -18,8 +18,9 @@ import { BasketComponent } from './basket/basket.component';
     ProductsModule,
     HomeModule,
     BasketModule,
-    RegisterModule
-    //LoginModule
+    RegisterModule,
+    PasswordResetModule,
+    UpdatePasswordModule
   ],
   exports: [
     BasketModule

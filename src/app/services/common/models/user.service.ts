@@ -23,4 +23,17 @@ export class UserService {
 
     return await firstValueFrom(obsUser) as Create_User;
   }
+
+  async updatePassword(userId: string, resetToken: string, password: string, passwordConfirm: string, successCallBack?: () => void, errorCallBack?: (error) => void){
+    const obsUser: Observable<any> = this.httpClientService.post({
+      controller: "users",
+      action : "update-password"
+    }, { userId: userId, resetToken: resetToken, password: password, passwordConfirm: passwordConfirm });
+
+    const promiseData: Promise<any> = firstValueFrom(obsUser);
+
+    promiseData.then(value => successCallBack()).catch(error => errorCallBack(error));
+
+    await promiseData;
+  }
 }
