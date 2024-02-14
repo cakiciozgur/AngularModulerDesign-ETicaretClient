@@ -14,10 +14,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { RemoveBasketItemDialogComponent } from './remove-basket-item-dialog/remove-basket-item-dialog.component';
 import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shopping-complete-dialog.component';
-import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { OrderDetailDialogComponent } from './order-detail-dialog/OrderDetailDialogComponent';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CompleteOrderDialogComponent } from './compete-order-dialog/complete-order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     SelectProductImageDialogComponent,
     RemoveBasketItemDialogComponent,
     ShoppingCompleteDialogComponent,
-    OrderDetailDialogComponent
+    OrderDetailDialogComponent,
+    CompleteOrderDialogComponent
 
   ],
   imports: [

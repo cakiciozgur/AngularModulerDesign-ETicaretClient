@@ -105,7 +105,6 @@ export class UserAuthService {
     }, { resetToken: resetToken, userId:userId });
 
     const verifyObj: { verify } = await firstValueFrom(obs);
-    debugger;
     callBackFunction();
     return verifyObj.verify;
   }

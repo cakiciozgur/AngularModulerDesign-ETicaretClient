@@ -3,12 +3,13 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\entities",
+    "\\src\\app\\services",
+    "\\src\\app\\services\\common",
+    "\\src\\app\\services\\common\\models",
     "\\src\\app\\ui",
     "\\src\\app\\ui\\components",
-    "\\src\\app\\ui\\components\\login",
-    "\\src\\app\\ui\\components\\password-reset",
-    "\\src\\app\\ui\\components\\update-password"
+    "\\src\\app\\ui\\components\\basket"
   ],
-  "SelectedNode": "\\src\\app\\ui\\components\\login\\login.component.html",
   "PreviewInSolutionExplorer": false
 }

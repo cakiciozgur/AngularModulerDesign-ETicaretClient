@@ -11,7 +11,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { BaseComponent, SpinnerType } from '../../../../base/base.component';
 import { SelectProductImageDialogComponent } from '../../../../dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import { List_Order } from '../../../../contracts/order/list_order';
-import { OrderDetailDialogComponent, OrderDetailDialogState } from '../../../../dialogs/order-detail-dialog/order-detail-dialog.component';
+import { OrderDetailDialogState } from '../../../../dialogs/order-detail-dialog/order-detail-dialog.component';
+import { OrderDetailDialogComponent } from '../../../../dialogs/order-detail-dialog/OrderDetailDialogComponent';
 
 @Component({
   selector: 'app-list',
@@ -29,7 +30,7 @@ export class ListComponent extends BaseComponent {
     super(spinner)
   }
 
-  displayedColumns: string[] = ['orderCode', 'username', 'totalPrice', 'createdDate', 'orderDetail', 'delete'];
+  displayedColumns: string[] = ['orderCode', 'username', 'totalPrice', 'createdDate', 'completed', 'orderDetail', 'delete'];
 
   dataSource: MatTableDataSource<List_Order> = null;
 

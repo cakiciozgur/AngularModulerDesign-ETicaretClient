@@ -15,6 +15,7 @@ export class Single_Order {
   description: string;
   basketItems: Basket_Item[];
   createdDate: Date;
+  completed: boolean;
 }
 
 export class Basket_Item {
