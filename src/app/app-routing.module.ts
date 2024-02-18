@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './admin/layout/layout.component';
-import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { HomeComponent } from './ui/components/home/home.component';
 import { authGuard } from './guards/common/auth.guard';
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 
 const routes: Routes = [
 
@@ -18,6 +18,8 @@ const routes: Routes = [
         { path: "products", loadChildren: () => import("./admin/components/product/product.module").then(module => module.ProductModule), canActivate: [authGuard] },
 
         { path: "orders", loadChildren: () => import("./admin/components/order/order.module").then(module => module.OrderModule), canActivate: [authGuard] },
+
+        { path: "authorize-menu", loadChildren: () => import("./admin/components/authorize-menu/authorize-menu.module").then(module => module.AuthorizeMenuModule), canActivate: [authGuard] },
 
       ], canActivate: [authGuard]
   },

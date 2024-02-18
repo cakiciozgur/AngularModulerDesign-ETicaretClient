@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.auth-section + .auth-section {
+  margin-top: 16px;
+}

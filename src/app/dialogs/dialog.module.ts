@@ -19,6 +19,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CompleteOrderDialogComponent } from './compete-order-dialog/complete-order-dialog.component';
+import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -27,12 +29,13 @@ import { CompleteOrderDialogComponent } from './compete-order-dialog/complete-or
     RemoveBasketItemDialogComponent,
     ShoppingCompleteDialogComponent,
     OrderDetailDialogComponent,
-    CompleteOrderDialogComponent
+    CompleteOrderDialogComponent,
+    AuthorizeMenuDialogComponent
 
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule,
+    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule, MatBadgeModule,
     FileUploadModule,
     FlexLayoutModule
   ],
