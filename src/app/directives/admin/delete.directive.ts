@@ -39,6 +39,7 @@ export class DeleteDirective {
       componentType: DeleteDialogComponent,
       data: DeleteState.Yes,
       afterClosed: async () => {
+        debugger
         this.spinner.show(SpinnerType.Timer);
         const td: HTMLTableCellElement = this.element.nativeElement;
         await this.httpClientService.delete({ controller: this.requestParameters.controller }, this.id).subscribe(data => {
@@ -48,7 +49,7 @@ export class DeleteDirective {
             height: "toggle"
           }, 700, () => {
             this.callback.emit();
-            this.alertifyService.message("Ürün Silinmiştir", { dismissOther: true, messageType: MessageType.Success, position: Position.TopCenter })
+            this.alertifyService.message(`${this.requestParameters.controller} başarıyla silinmiştir`, { dismissOther: true, messageType: MessageType.Success, position: Position.TopCenter })
           });
         }, (errorResponse: HttpErrorResponse) => {
           this.spinner.hide(SpinnerType.Timer);

@@ -66,4 +66,8 @@ export class ListComponent extends BaseComponent {
       }
     })
   }
+
+  requestParameters: RequestParameters = {
+    controller: "orders"
+  }
 }
