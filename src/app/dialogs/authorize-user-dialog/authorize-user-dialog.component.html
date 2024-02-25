@@ -6,7 +6,7 @@
 
 <mat-selection-list #rolesComponent>
   @for (role of listRoles; track role) {
-  <mat-list-option [value]="role.id" selected="{{role.assigned}}">{{role.name}}</mat-list-option>
+  <mat-list-option [value]="role.name" selected="{{role.assigned}}">{{role.name}}</mat-list-option>
   }
 </mat-selection-list>
 
