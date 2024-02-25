@@ -15,6 +15,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
   constructor(private toastrService: CustomeToastrService, private userAuthService: UserAuthService, private router: Router, private spinner: NgxSpinnerService) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       return next.handle(req).pipe(catchError(error => {
+
         switch (error.status) {
           case HttpStatusCode.Unauthorized:
 
@@ -30,7 +31,6 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
               });
             }
-
             break;
           case HttpStatusCode.InternalServerError:
             this.toastrService.message("Server Not Found", "Server Error", { position: ToastrPosition.BottomFullWidth, messageType: ToastrMessageType.Warning, timeOut: 3000 })

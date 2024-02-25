@@ -19,7 +19,7 @@
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let element">
-        <a mat-button color="primary" (click)="assignRole(element.id)">Rol Ata</a>
+        <a mat-button color="primary" (click)="assignRole(element.id, element.username)">Rol Ata</a>
       </td>
     </ng-container>
 

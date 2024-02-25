@@ -44,7 +44,7 @@ export class AuthorizeUserDialogComponent extends BaseDialog<AuthorizeUserDialog
       }
     }
     this.totalCount = this.allRoles.totalRoleCount;
-    this.assignedRoles = await this.userService.getRolesToUser(this.data, () => {
+    this.assignedRoles = await this.userService.getRolesToUser(this.data.id, () => {
       this.spinnerService.hide(SpinnerType.Timer);
     });
 
@@ -63,7 +63,7 @@ export class AuthorizeUserDialogComponent extends BaseDialog<AuthorizeUserDialog
   assignRole(rolesComponent: MatSelectionList) {
     const roles: string[] = rolesComponent.selectedOptions.selected.map(o => o.value);
     this.spinnerService.show(SpinnerType.Timer);
-    this.userService.assignRoleUser(roles, this.data,
+    this.userService.assignRoleUser(roles, this.data.id,
       () => {
         this.spinnerService.hide(SpinnerType.Timer);
         this.alertifyService.message("Roller Başarıyla Atanmıştır", { dismissOther: true, messageType: MessageType.Success, position: Position.TopCenter })

@@ -57,10 +57,10 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   }
 
-  assignRole(id: string) {
+  assignRole(id: string, username:string) {
     this.dialogService.openDialog({
       componentType: AuthorizeUserDialogComponent,
-      data: id,
+      data: { id:id, username:username },
       options: {
         width: "750px"
       },
