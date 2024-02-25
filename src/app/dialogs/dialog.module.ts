@@ -21,6 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CompleteOrderDialogComponent } from './compete-order-dialog/complete-order-dialog.component';
 import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { MatBadgeModule } from '@angular/material/badge';
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule, MatBadgeModule,
+    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule, MatBadgeModule, MatListModule,
     FileUploadModule,
     FlexLayoutModule
   ],
