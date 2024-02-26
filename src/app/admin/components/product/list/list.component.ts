@@ -9,6 +9,7 @@ import { HttpClientService, RequestParameters } from '../../../../services/commo
 import { DialogService } from '../../../../services/common/dialog.service';
 import { SelectImageDialogState, SelectProductImageDialogComponent } from '../../../../dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import { List_Product } from '../../../../contracts/product/list_product';
+import { QrcodeDialogsComponent } from '../../../../dialogs/qrcode-dialogs/qrcode-dialogs.component';
 
 declare var $: any;
 
@@ -27,7 +28,7 @@ export class ListComponent extends BaseComponent {
     super(spinner)
   }
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate', 'photos', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate', 'photos', 'qrCode', 'edit', 'delete'];
 
   dataSource: MatTableDataSource<List_Product> = null;
 
@@ -65,6 +66,19 @@ export class ListComponent extends BaseComponent {
       data: id,
       options: {
         width: "1200px"
+      },
+      afterClosed: () => {
+
+      }
+    })
+  }
+
+  generateQrCode(id: string) {
+    this.dialogService.openDialog({
+      componentType: QrcodeDialogsComponent,
+      data: id,
+      afterClosed: () => {
+
       }
     })
   }

@@ -32,7 +32,7 @@ export class HttpClientService {
 
     url = `${url}${id ? `/${id}` : ""}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
-    return this.httpClient.get<T>(url, { headers: requestParameter.headers })
+    return this.httpClient.get<T>(url, { headers: requestParameter.headers, responseType: requestParameter.responseType as 'json' })
 
   }
 
@@ -40,7 +40,7 @@ export class HttpClientService {
 
     let url: string = `${this.checkFullEndpoint(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
-    return this.httpClient.post<T>(url, body, { headers: requestParameter.headers });
+    return this.httpClient.post<T>(url, body, { headers: requestParameter.headers, responseType: requestParameter.responseType as 'json' });
 
   }
 
@@ -48,7 +48,7 @@ export class HttpClientService {
 
     let url: string = `${this.checkFullEndpoint(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
-    return this.httpClient.put<T>(url, body, { headers: requestParameter.headers });
+    return this.httpClient.put<T>(url, body, { headers: requestParameter.headers, responseType: requestParameter.responseType as 'json' });
   }
 
   delete<T>(requestParameter: Partial<RequestParameters>, id: string): Observable<T> {
@@ -57,7 +57,7 @@ export class HttpClientService {
 
     url = `${url}${requestParameter.queryString ? `?${requestParameter.queryString}` : ""}`;
 
-    return this.httpClient.delete<T>(url, { headers: requestParameter.headers });
+    return this.httpClient.delete<T>(url, { headers: requestParameter.headers, responseType: requestParameter.responseType as 'json' });
   }
 
 }
@@ -69,4 +69,6 @@ export class RequestParameters {
   baseUrl?: string;
   fullEndPoint? : string;
   queryString?: string;
+
+  responseType?: string = 'json'
 }
