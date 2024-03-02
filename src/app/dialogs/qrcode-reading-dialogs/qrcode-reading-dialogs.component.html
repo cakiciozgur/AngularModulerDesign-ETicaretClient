@@ -1,0 +1,12 @@
+<h4>Product QRCode Reading</h4>
+
+<mat-form-field class="m-5">
+  <mat-label>Stock</mat-label>
+  <input matInput type="number" min="0" value="0" #txtStock>
+</mat-form-field>
+
+<ngx-scanner-qrcode class="m-5" #scanner="scanner" (event)="onEvent($event)"></ngx-scanner-qrcode>
+
+<mat-dialog-actions class="justify-content-end">
+  <button mat-button mat-dialog-close id="btnClose">Cancel</button>
+</mat-dialog-actions>

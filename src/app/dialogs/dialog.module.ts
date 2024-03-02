@@ -24,7 +24,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
 import { QrcodeDialogsComponent } from './qrcode-dialogs/qrcode-dialogs.component';
-
+import { QrcodeReadingDialogsComponent } from './qrcode-reading-dialogs/qrcode-reading-dialogs.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgxScannerQrcodeModule, LOAD_WASM } from 'ngx-scanner-qrcode';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
@@ -35,13 +37,15 @@ import { QrcodeDialogsComponent } from './qrcode-dialogs/qrcode-dialogs.componen
     CompleteOrderDialogComponent,
     AuthorizeMenuDialogComponent,
     AuthorizeUserDialogComponent,
-    QrcodeDialogsComponent
+    QrcodeDialogsComponent,
+    QrcodeReadingDialogsComponent
   ],
   imports: [
     CommonModule,
-    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule, MatBadgeModule, MatListModule,
+    MatDialogModule, MatButtonModule, MatCardModule, MatIconModule, MatExpansionModule, MatCheckboxModule, MatRadioModule, MatTableModule, MatInputModule, MatToolbarModule, MatBadgeModule, MatListModule, MatFormFieldModule,
     FileUploadModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxScannerQrcodeModule
   ],
   exports: [
     DeleteDialogComponent

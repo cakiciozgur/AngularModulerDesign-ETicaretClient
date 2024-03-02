@@ -90,4 +90,16 @@ export class ProductService {
     await firstValueFrom(changeShowcaseObs);
     successCallBack();
   }
+
+  async updateStockQrCodeToProduct(productId: string, stock: number, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const obs: Observable<any> = this.httpClientService.put({
+      controller: "products",
+      action: "qrcode",
+    }, { productId, stock });
+
+    const promiseData = firstValueFrom(obs);
+
+    promiseData.then(successCallBack).catch(errorCallBack);
+    return await promiseData as { success: boolean };
+  }
 }
